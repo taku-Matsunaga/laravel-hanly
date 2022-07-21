@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         Pin::factory(10)->create();
         FriendsRelationship::factory(10)->create();
 
+        \Illuminate\Support\Facades\Artisan::call('passport:client --password');
+
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
