@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'success'; // ヘルスチェック用
 });
+
+Route::get('/friend/image/{friendId}', 'Web\ImageController@show')->name('web.image.get');

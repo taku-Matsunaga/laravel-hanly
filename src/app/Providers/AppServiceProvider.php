@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
 
@@ -15,7 +16,8 @@ class AppServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Models\Model' => 'App\Policies\ModelPolicy',
+        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Friend' => 'App\Policies\FriendPolicy',
     ];
 
     /**
@@ -36,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        JsonResource::withoutWrapping();
 
         Passport::routes(function ($router) {
             $router->forAccessTokens();

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\MeController;
+use App\Http\Controllers\Api\SignupController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,18 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/signup', function (Request $request) {
-    // とりあえず、ベタ書きでレスポンスする
-    // レスポンスの形をswaggerと合わせる
-    return response()->json([
-        'id' => 1,
-        'nickname' => 'ニックネーム',
-        'email' => 'test@example.com',
-    ]);
-});
+Route::post('/signup', [SignupController::class, "signup"])->name('api.signup.post');
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('/me', 'Api\MeController@me')->name('api.me.get');
+    Route::get('/me', [MeController::class, "me"])->name('api.me.get');
 
     Route::post('/my/image', 'Api\ImageController@store')->name('api.my.image.post');
 
@@ -39,3 +33,4 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('/friends', 'Api\FriendController@list')->name('api.friends.list.get');
 });
+
